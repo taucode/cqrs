@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace TauCode.Cqrs.Commands
 {
@@ -15,6 +16,13 @@ namespace TauCode.Cqrs.Commands
             where TCommand : ICommand
         {
             // idle, override in ancestor if needed.
+        }
+
+        protected virtual Task OnBeforeExecuteHandlerAsync<TCommand>(ICommandHandler<TCommand> handler, TCommand command)
+            where TCommand : ICommand
+        {
+            // idle, override in ancestor if needed.
+            return Task.CompletedTask;
         }
 
         public void Dispatch<TCommand>(TCommand command) where TCommand : ICommand
@@ -42,6 +50,33 @@ namespace TauCode.Cqrs.Commands
             this.OnBeforeExecuteHandler(commandHandler, command);
 
             commandHandler.Execute(command);
+        }
+
+        public async Task DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand
+        {
+            if (command == null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            ICommandHandler<TCommand> commandHandler;
+            try
+            {
+                commandHandler = CommandHandlerFactory.Create<TCommand>();
+            }
+            catch (Exception ex)
+            {
+                throw new CannotCreateCommandHandlerException(ex);
+            }
+
+            if (commandHandler == null)
+            {
+                throw new CannotCreateCommandHandlerException();
+            }
+
+            await this.OnBeforeExecuteHandlerAsync(commandHandler, command);
+
+            await commandHandler.ExecuteAsync(command);
         }
     }
 }

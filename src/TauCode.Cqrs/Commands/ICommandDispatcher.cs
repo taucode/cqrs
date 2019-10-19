@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace TauCode.Cqrs.Commands
 {
@@ -6,6 +7,7 @@ namespace TauCode.Cqrs.Commands
     {
         void Dispatch<TCommand>(TCommand command) where TCommand : ICommand;
 
-        Task DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand;
+        Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default)
+            where TCommand : ICommand;
     }
 }

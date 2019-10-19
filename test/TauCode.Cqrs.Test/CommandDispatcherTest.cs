@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using TauCode.Cqrs.Commands;
 
@@ -45,7 +46,7 @@ namespace TauCode.Cqrs.Test
                 _nameHolder.SetName(command.Name);
             }
 
-            public Task ExecuteAsync(FooCommand command)
+            public Task ExecuteAsync(FooCommand command, CancellationToken cancellationToken)
             {
                 this.Execute(command);
                 return Task.CompletedTask;

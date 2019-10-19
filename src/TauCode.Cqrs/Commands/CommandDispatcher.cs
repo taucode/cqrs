@@ -1,16 +1,28 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TauCode.Cqrs.Commands
 {
     public class CommandDispatcher : ICommandDispatcher
     {
+        #region Fields
+
         protected readonly ICommandHandlerFactory CommandHandlerFactory;
+
+        #endregion
+
+        #region Constructor
 
         public CommandDispatcher(ICommandHandlerFactory commandHandlerFactory)
         {
-            CommandHandlerFactory = commandHandlerFactory ?? throw new ArgumentNullException(nameof(commandHandlerFactory));
+            CommandHandlerFactory =
+                commandHandlerFactory ?? throw new ArgumentNullException(nameof(commandHandlerFactory));
         }
+
+        #endregion
+
+        #region Virtual
 
         protected virtual void OnBeforeExecuteHandler<TCommand>(ICommandHandler<TCommand> handler, TCommand command)
             where TCommand : ICommand
@@ -18,14 +30,22 @@ namespace TauCode.Cqrs.Commands
             // idle, override in ancestor if needed.
         }
 
-        protected virtual Task OnBeforeExecuteHandlerAsync<TCommand>(ICommandHandler<TCommand> handler, TCommand command)
+        protected virtual Task OnBeforeExecuteHandlerAsync<TCommand>(
+            ICommandHandler<TCommand> handler,
+            TCommand command,
+            CancellationToken cancellationToken)
             where TCommand : ICommand
         {
             // idle, override in ancestor if needed.
             return Task.CompletedTask;
         }
 
-        public void Dispatch<TCommand>(TCommand command) where TCommand : ICommand
+        #endregion
+
+        #region ICommandDispatcher Members
+
+        public void Dispatch<TCommand>(TCommand command)
+            where TCommand : ICommand
         {
             if (command == null)
             {
@@ -52,7 +72,8 @@ namespace TauCode.Cqrs.Commands
             commandHandler.Execute(command);
         }
 
-        public async Task DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand
+        public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken)
+            where TCommand : ICommand
         {
             if (command == null)
             {
@@ -74,9 +95,10 @@ namespace TauCode.Cqrs.Commands
                 throw new CannotCreateCommandHandlerException();
             }
 
-            await this.OnBeforeExecuteHandlerAsync(commandHandler, command);
-
-            await commandHandler.ExecuteAsync(command);
+            await this.OnBeforeExecuteHandlerAsync(commandHandler, command, cancellationToken);
+            await commandHandler.ExecuteAsync(command, cancellationToken);
         }
+
+        #endregion
     }
 }

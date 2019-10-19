@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace TauCode.Cqrs.Commands
 {
@@ -9,7 +10,7 @@ namespace TauCode.Cqrs.Commands
             throw new FeatureNotImplementedException();
         }
 
-        public virtual Task ExecuteAsync(TCommand command)
+        public virtual Task ExecuteAsync(TCommand command, CancellationToken cancellationToken)
         {
             throw new FeatureNotImplementedException();
         }

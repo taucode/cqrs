@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace TauCode.Cqrs.Queries
 {
@@ -9,7 +10,7 @@ namespace TauCode.Cqrs.Queries
             throw new FeatureNotImplementedException();
         }
 
-        public Task ExecuteAsync(TQuery query)
+        public Task ExecuteAsync(TQuery query, CancellationToken cancellationToken)
         {
             throw new FeatureNotImplementedException();
         }

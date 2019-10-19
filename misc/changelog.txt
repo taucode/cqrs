@@ -1,3 +1,7 @@
 2019-06-24
 ==========
     1. Built for .NET Standard
+
+2019-10-19
+==========
+    1. Added async support.

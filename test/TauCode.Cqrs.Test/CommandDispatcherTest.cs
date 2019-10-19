@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using System;
+using System.Threading.Tasks;
 using TauCode.Cqrs.Commands;
 
 namespace TauCode.Cqrs.Test
@@ -15,7 +16,7 @@ namespace TauCode.Cqrs.Test
             public string Name { get; set; }
         }
 
-        public class FooNameHodler
+        public class FooNameHolder
         {
             private string _name;
 
@@ -32,30 +33,36 @@ namespace TauCode.Cqrs.Test
 
         public class FooCommandHandler : ICommandHandler<FooCommand>
         {
-            private readonly FooNameHodler _nameHodler;
+            private readonly FooNameHolder _nameHolder;
 
-            public FooCommandHandler(FooNameHodler nameHodler)
+            public FooCommandHandler(FooNameHolder nameHolder)
             {
-                _nameHodler = nameHodler;
+                _nameHolder = nameHolder;
             }
 
             public void Execute(FooCommand command)
             {
-                _nameHodler.SetName(command.Name);
+                _nameHolder.SetName(command.Name);
+            }
+
+            public Task ExecuteAsync(FooCommand command)
+            {
+                this.Execute(command);
+                return Task.CompletedTask;
             }
         }
 
         #endregion
 
         private Mock<ICommandHandlerFactory> _commandHandlerFactoryMock;
-        private FooNameHodler _nameHodler;
+        private FooNameHolder _nameHolder;
 
         [SetUp]
         public void SetUp()
         {
-            _nameHodler = new FooNameHodler();
+            _nameHolder = new FooNameHolder();
             _commandHandlerFactoryMock = new Mock<ICommandHandlerFactory>();
-            _commandHandlerFactoryMock.Setup(x => x.Create<FooCommand>()).Returns(new FooCommandHandler(_nameHodler));
+            _commandHandlerFactoryMock.Setup(x => x.Create<FooCommand>()).Returns(new FooCommandHandler(_nameHolder));
         }
 
         [Test]
@@ -88,7 +95,7 @@ namespace TauCode.Cqrs.Test
             commandDispatcher.Dispatch(command);
 
             // Assert
-            Assert.That(_nameHodler.GetName(), Is.EqualTo("Maria"));
+            Assert.That(_nameHolder.GetName(), Is.EqualTo("Maria"));
         }
 
         [Test]

@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using System;
+using System.Threading.Tasks;
 using TauCode.Cqrs.Queries;
 
 namespace TauCode.Cqrs.Test
@@ -45,6 +46,12 @@ namespace TauCode.Cqrs.Test
                     Greeting = greeting,
                 };
                 query.SetResult(queryResult);
+            }
+
+            public Task ExecuteAsync(HelloQuery query)
+            {
+                this.Execute(query);
+                return Task.CompletedTask;
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace TauCode.Cqrs.Commands
 {
@@ -6,6 +7,6 @@ namespace TauCode.Cqrs.Commands
     {
         void Execute(TCommand command);
 
-        Task ExecuteAsync(TCommand command);
+        Task ExecuteAsync(TCommand command, CancellationToken cancellationToken = default);
     }
 }

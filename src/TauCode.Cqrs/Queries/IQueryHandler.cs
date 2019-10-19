@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace TauCode.Cqrs.Queries
 {
@@ -6,6 +7,6 @@ namespace TauCode.Cqrs.Queries
         where TQuery : IQuery
     {
         void Execute(TQuery query);
-        Task ExecuteAsync(TQuery query);
+        Task ExecuteAsync(TQuery query, CancellationToken cancellationToken = default);
     }
 }

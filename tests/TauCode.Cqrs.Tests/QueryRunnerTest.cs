@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TauCode.Cqrs.Queries;
 
-namespace TauCode.Cqrs.Test
+namespace TauCode.Cqrs.Tests
 {
     [TestFixture]
     public class QueryRunnerTest

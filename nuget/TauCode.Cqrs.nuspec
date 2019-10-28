@@ -8,7 +8,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Basic functionality for CQRS support</description>
     <releaseNotes>
-      Release v3.0
+      Hotfix: 3.0.1
+      1. Methods of QueryHandlerBase are now virtual.
     </releaseNotes>
     <tags>taucode cqrs</tags>
     <dependencies>

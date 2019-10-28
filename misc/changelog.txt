@@ -15,5 +15,5 @@
 
 2019-07-25
 ==========
-    Hotfix: 3.0.1
+    Hotfix: v3.0.1
     1. Methods of QueryHandlerBase are now virtual.

@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{13578288-3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{321F21C0-EC9F-4346-B081-012C50CE8346}"
 	ProjectSection(SolutionItems) = preProject
+		nuget\TauCode.Cqrs.Autofac.nuspec = nuget\TauCode.Cqrs.Autofac.nuspec
+		nuget\TauCode.Cqrs.NHibernate.nuspec = nuget\TauCode.Cqrs.NHibernate.nuspec
 		nuget\TauCode.Cqrs.nuspec = nuget\TauCode.Cqrs.nuspec
 	EndProjectSection
 EndProject
@@ -21,6 +23,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TauCode.Cqrs", "src\TauCode.Cqrs\TauCode.Cqrs.csproj", "{CE9646A5-D83E-4048-88FC-95B332612F5D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TauCode.Cqrs.Tests", "tests\TauCode.Cqrs.Tests\TauCode.Cqrs.Tests.csproj", "{66CD0EDB-6933-4920-B16F-EC63A1EF7DCB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TauCode.Cqrs.Autofac", "src\TauCode.Cqrs.Autofac\TauCode.Cqrs.Autofac.csproj", "{4865B14E-4E4E-4981-8CC8-23F7057E5B4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TauCode.Cqrs.NHibernate", "src\TauCode.Cqrs.NHibernate\TauCode.Cqrs.NHibernate.csproj", "{BFC7F9CC-3C03-4889-8416-09F04346508A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TauCode.Cqrs.Autofac.Tests", "tests\TauCode.Cqrs.Autofac.Tests\TauCode.Cqrs.Autofac.Tests.csproj", "{7C228EB5-1820-48B9-B293-022E86C5B2C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TauCode.Cqrs.NHibernate.Tests", "tests\TauCode.Cqrs.NHibernate.Tests\TauCode.Cqrs.NHibernate.Tests.csproj", "{FC1251E1-D3FA-4817-93A6-6D3716CB181C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +46,22 @@ Global
 		{66CD0EDB-6933-4920-B16F-EC63A1EF7DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66CD0EDB-6933-4920-B16F-EC63A1EF7DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66CD0EDB-6933-4920-B16F-EC63A1EF7DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4865B14E-4E4E-4981-8CC8-23F7057E5B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4865B14E-4E4E-4981-8CC8-23F7057E5B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4865B14E-4E4E-4981-8CC8-23F7057E5B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4865B14E-4E4E-4981-8CC8-23F7057E5B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC7F9CC-3C03-4889-8416-09F04346508A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC7F9CC-3C03-4889-8416-09F04346508A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC7F9CC-3C03-4889-8416-09F04346508A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC7F9CC-3C03-4889-8416-09F04346508A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C228EB5-1820-48B9-B293-022E86C5B2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C228EB5-1820-48B9-B293-022E86C5B2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C228EB5-1820-48B9-B293-022E86C5B2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C228EB5-1820-48B9-B293-022E86C5B2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC1251E1-D3FA-4817-93A6-6D3716CB181C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC1251E1-D3FA-4817-93A6-6D3716CB181C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC1251E1-D3FA-4817-93A6-6D3716CB181C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC1251E1-D3FA-4817-93A6-6D3716CB181C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +69,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CE9646A5-D83E-4048-88FC-95B332612F5D} = {44EC8298-BED4-4137-8378-95ADA7810659}
 		{66CD0EDB-6933-4920-B16F-EC63A1EF7DCB} = {FB60BD56-A58F-4C78-9B1D-E54EC36D1BB2}
+		{4865B14E-4E4E-4981-8CC8-23F7057E5B4C} = {44EC8298-BED4-4137-8378-95ADA7810659}
+		{BFC7F9CC-3C03-4889-8416-09F04346508A} = {44EC8298-BED4-4137-8378-95ADA7810659}
+		{7C228EB5-1820-48B9-B293-022E86C5B2C9} = {FB60BD56-A58F-4C78-9B1D-E54EC36D1BB2}
+		{FC1251E1-D3FA-4817-93A6-6D3716CB181C} = {FB60BD56-A58F-4C78-9B1D-E54EC36D1BB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF3AD110-E91F-460E-BDE5-5BEEC59ABFF9}

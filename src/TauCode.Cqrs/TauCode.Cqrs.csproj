@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="TauCode.Domain" Version="3.0.0.1" />
+    <PackageReference Include="TauCode.Validation" Version="3.0.0.1" />
+  </ItemGroup>
+
 </Project>

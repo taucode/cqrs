@@ -1,0 +1,4 @@
+2019-11-22
+==========
+    1. Fix changelog (dates).
+    2. Fix test class names (FooTest.cs --> FooTests.cs)

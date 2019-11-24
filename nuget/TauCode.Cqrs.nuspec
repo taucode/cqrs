@@ -12,6 +12,8 @@
     </releaseNotes>
     <tags>taucode cqrs</tags>
     <dependencies>
+      <dependency id="TauCode.Domain" version="4.0.0-dev-2019-24-11-13-29" />
+      <dependency id="TauCode.Validation" version="3.0.0.1" />
     </dependencies>
   </metadata>
   <files>

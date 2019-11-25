@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>TauCode.Cqrs.NHibernate</id>
-    <version>4.0-dev-2019-11-24-11-57</version>
+    <version>4.0.0-dev-2019-11-24-14-53</version>
     <authors>TauCode</authors>
     <owners>TauCode</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -15,7 +15,7 @@
     <tags>taucode cqrs nhibernate</tags>
     <dependencies>
       <dependency id="NHibernate" version="5.2.6" />
-      <dependency id="TauCode.Cqrs" version="3.0.1" />
+      <dependency id="TauCode.Cqrs" version="4.0.0-dev-2019-11-24-14-48" />
     </dependencies>
   </metadata>
   <files>

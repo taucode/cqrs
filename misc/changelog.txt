@@ -13,7 +13,12 @@
     Version: v3.0
     1. Release v3.0
 
-2019-07-25
+2019-10-25
 ==========
     Hotfix: v3.0.1
     1. Methods of QueryHandlerBase are now virtual.
+
+2019-11-25
+==========
+    Version: 4.0
+    1. Solutions reorganized.

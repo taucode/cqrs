@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>TauCode.Cqrs.Autofac</id>
-    <version>4.0.0-dev-2019-11-24-14-52</version>
+    <version>4.0</version>
     <authors>TauCode</authors>
     <owners>TauCode</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -10,12 +10,12 @@
     <projectUrl>http://taucode.com/</projectUrl>
     <description>Basic functionality for CQRS support via Autofac</description>
     <releaseNotes>
-      Huge refactoring
+      1. Solutions reorganized.
     </releaseNotes>
     <tags>taucode cqrs autofac</tags>
     <dependencies>
       <dependency id="Autofac" version="4.9.4" />
-      <dependency id="TauCode.Cqrs" version="4.0.0-dev-2019-11-24-14-48" />
+      <dependency id="TauCode.Cqrs" version="4.0.0" />
     </dependencies>
   </metadata>
   <files>

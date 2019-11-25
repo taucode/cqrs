@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TauCode.Domain" Version="4.0.0-dev-2019-24-11-13-29" />
+    <PackageReference Include="TauCode.Domain" Version="4.0.0" />
     <PackageReference Include="TauCode.Validation" Version="3.0.0.1" />
   </ItemGroup>
 

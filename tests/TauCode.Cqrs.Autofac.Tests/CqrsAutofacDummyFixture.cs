@@ -3,10 +3,10 @@
 namespace TauCode.Cqrs.Autofac.Tests
 {
     [TestFixture]
-    public class CqrsAutofacTests
+    public class CqrsAutofacDummyFixture
     {
         [Test]
-        public void DummyTest()
+        public void CqrsAutofacDummyTest()
         {
             Assert.Pass("Added for the Jenkins jobs compatibility");
         }

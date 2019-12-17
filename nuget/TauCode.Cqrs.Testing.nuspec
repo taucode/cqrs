@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>TauCode.Cqrs.Testing</id>
+    <version>4.0-dev-2019-12-17-22-20</version>
+    <authors>TauCode</authors>
+    <owners>TauCode</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Testing library for CQRS features</description>
+    <releaseNotes>
+      TODO: inited.
+    </releaseNotes>
+    <tags>taucode cqrs</tags>
+    <dependencies>
+      <dependency id="NUnit" version="3.12.0" />
+      <dependency id="TauCode.Cqrs" version="4.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\src\TauCode.Cqrs.Testing\bin\Release\netstandard2.0\TauCode.Cqrs.Testing.dll" target="lib\netstandard2.0" />
+    <file src="..\src\TauCode.Cqrs.Testing\bin\Release\netstandard2.0\TauCode.Cqrs.Testing.pdb" target="lib\netstandard2.0" />
+  </files>
+</package>

@@ -1,22 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>TauCode.Cqrs</id>
-    <version>4.0.0.1-dev-2019-12-20-20-37</version>
+    <version>1.0.0.0-dev-2019-12-22-00-45</version>
     <authors>TauCode</authors>
     <owners>TauCode</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="file">LICENSE.txt</license>
+    <projectUrl>https://github.com/taucode/taucode.cqrs</projectUrl>
     <description>Basic functionality for CQRS support</description>
     <releaseNotes>
-      1. Solutions reorganized.
+      Moving to nuget.org
     </releaseNotes>
     <tags>taucode cqrs</tags>
     <dependencies>
-      <dependency id="TauCode.Domain" version="4.0.0.1-dev-2019-12-20-15-18" />
-      <dependency id="TauCode.Validation" version="3.0.0.1" />
+      <dependency id="TauCode.Domain" version="1.0.0-dev-2019-12-21-23-43" />
+      <dependency id="TauCode.Validation" version="1.0.0-dev-2019-12-22-00-07" />
     </dependencies>
   </metadata>
   <files>
+    <file src="..\LICENSE.txt" target="" />
     <file src="..\src\TauCode.Cqrs\bin\Release\netstandard2.0\TauCode.Cqrs.dll" target="lib\netstandard2.0" />
     <file src="..\src\TauCode.Cqrs\bin\Release\netstandard2.0\TauCode.Cqrs.pdb" target="lib\netstandard2.0" />
   </files>

@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TauCode.Domain" Version="4.0.0.1-dev-2019-12-20-15-18" />
-    <PackageReference Include="TauCode.Validation" Version="3.0.0.1" />
+    <PackageReference Include="TauCode.Domain" Version="1.0.0-dev-2019-12-21-23-43" />
+    <PackageReference Include="TauCode.Validation" Version="1.0.0-dev-2019-12-22-00-07" />
   </ItemGroup>
 
 </Project>

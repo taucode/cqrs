@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>TauCode.Cqrs</id>
-    <version>1.0.0.0-dev-2019-12-22-00-45</version>
+    <version>1.0.0.0-dev-2020-03-14-20-27</version>
     <authors>TauCode</authors>
     <owners>TauCode</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/taucode/taucode.cqrs</projectUrl>
     <description>Basic functionality for CQRS support</description>
     <releaseNotes>
-      Moving to nuget.org
+      Migrating to Azure DevOps.
     </releaseNotes>
     <tags>taucode cqrs</tags>
     <dependencies>

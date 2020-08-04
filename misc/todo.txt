@@ -5,4 +5,9 @@
 
 2019-11-25
 ==========
-    1. Write a doc about how to deploy multi-project solutions (hint: branch 'release-n.m' is merged into master many times, by number of projects.)
+X   1. Write a doc about how to deploy multi-project solutions (hint: branch 'release-n.m' is merged into master many times, by number of projects.)
+
+2020-03-29
+==========
+    1. CqrsException
+

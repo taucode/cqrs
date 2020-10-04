@@ -25,8 +25,7 @@ namespace TauCode.Cqrs.Validation
             var oneIsValid = query.GetId() == null ^ query.GetCode() == null;
             if (!oneIsValid)
             {
-// todo: not 'Code', but '<GetCodePropertyName>'!
-                customContext.AddFailure(new ValidationFailure("query", "Either 'Id' or 'Code' must be not null.")
+                customContext.AddFailure(new ValidationFailure("query", $"Either '{query.GetIdPropertyName()}' or '{query.GetCodePropertyName()}' must be not null.")
                 {
                     ErrorCode = "CodedEntityQueryValidator",
                 });

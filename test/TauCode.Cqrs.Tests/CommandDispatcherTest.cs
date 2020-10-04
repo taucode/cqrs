@@ -4,6 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using TauCode.Cqrs.Commands;
+using TauCode.Cqrs.Exceptions;
 
 namespace TauCode.Cqrs.Tests
 {
@@ -121,9 +122,9 @@ namespace TauCode.Cqrs.Tests
             var command = new FooCommand { Name = "Maria", };
 
             // Act
-            var ex = Assert.Throws<CannotCreateCommandHandlerException>(() => commandDispatcher.Dispatch(command));
+            var ex = Assert.Throws<CqrsException>(() => commandDispatcher.Dispatch(command));
 
-            Assert.That(ex.Message, Is.EqualTo("Attempt to create the command handler failed."));
+            Assert.That(ex.Message, Is.EqualTo($"Failed to create command handler for command of type '{typeof(FooCommand).FullName}'."));
             var innerEx = ex.InnerException;
             Assert.That(innerEx, Is.Not.Null);
             Assert.That(innerEx, Is.InstanceOf<InvalidOperationException>());
@@ -141,9 +142,9 @@ namespace TauCode.Cqrs.Tests
             var command = new FooCommand { Name = "Maria", };
 
             // Act
-            var ex = Assert.Throws<CannotCreateCommandHandlerException>(() => commandDispatcher.Dispatch(command));
+            var ex = Assert.Throws<CqrsException>(() => commandDispatcher.Dispatch(command));
 
-            Assert.That(ex.Message, Is.EqualTo("Attempt to create the command handler failed."));
+            Assert.That(ex.Message, Is.EqualTo("'CommandHandlerFactory.Create' returned 'null'."));
             var innerEx = ex.InnerException;
             Assert.That(innerEx, Is.Null);
         }

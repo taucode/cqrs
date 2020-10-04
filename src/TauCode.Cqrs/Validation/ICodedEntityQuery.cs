@@ -1,11 +1,13 @@
-﻿using TauCode.Domain.Identities;
+﻿using TauCode.Cqrs.Queries;
+using TauCode.Domain.Identities;
 
-namespace TauCode.Cqrs.Queries
+namespace TauCode.Cqrs.Validation
 {
     public interface ICodedEntityQuery : IQuery
     {
         IdBase GetId();
         string GetCode();
+        string GetIdPropertyName();
         string GetCodePropertyName();
     }
 }

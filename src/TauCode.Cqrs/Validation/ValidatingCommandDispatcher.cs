@@ -1,12 +1,14 @@
 ﻿using FluentValidation;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using TauCode.Cqrs.Commands;
 
 namespace TauCode.Cqrs.Validation
 {
     public class ValidatingCommandDispatcher : CommandDispatcher, IValidatingCommandDispatcher
     {
-        protected ICommandValidatorSource CommandValidatorSource { get; }
+        #region Constructor
 
         public ValidatingCommandDispatcher(
             ICommandHandlerFactory commandHandlerFactory,
@@ -18,6 +20,35 @@ namespace TauCode.Cqrs.Validation
                 ??
                 throw new ArgumentNullException(nameof(commandValidatorSource));
         }
+
+
+        #endregion
+
+        #region Protected
+
+        protected ICommandValidatorSource CommandValidatorSource { get; }
+
+        #endregion
+
+        #region Overridden
+
+        protected override void OnBeforeExecuteHandler<TCommand>(ICommandHandler<TCommand> handler, TCommand command)
+        {
+            this.Validate(command);
+        }
+
+        protected override Task OnBeforeExecuteHandlerAsync<TCommand>(
+            ICommandHandler<TCommand> handler,
+            TCommand command,
+            CancellationToken cancellationToken)
+        {
+            return this.ValidateAsync(command, cancellationToken);
+        }
+
+
+        #endregion
+
+        #region IValidatingCommandDispatcher Members
 
         public void Validate<TCommand>(TCommand command) where TCommand : ICommand
         {
@@ -32,9 +63,20 @@ namespace TauCode.Cqrs.Validation
             }
         }
 
-        protected override void OnBeforeExecuteHandler<TCommand>(ICommandHandler<TCommand> handler, TCommand command)
+        public async Task ValidateAsync<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : ICommand
         {
-            this.Validate(command);
+            var validator = this.CommandValidatorSource.GetValidator<TCommand>();
+            if (validator != null)
+            {
+                var validationResult = await validator.ValidateAsync(command, cancellationToken);
+                if (!validationResult.IsValid)
+                {
+                    throw new ValidationException("The command is invalid.", validationResult.Errors);
+                }
+            }
         }
+
+
+        #endregion
     }
 }

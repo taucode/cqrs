@@ -1,12 +1,14 @@
 ﻿using FluentValidation;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using TauCode.Cqrs.Queries;
 
 namespace TauCode.Cqrs.Validation
 {
     public class ValidatingQueryRunner : QueryRunner, IValidatingQueryRunner
     {
-        protected IQueryValidatorSource QueryValidatorSource { get; }
+        #region Constructor
 
         public ValidatingQueryRunner(
             IQueryHandlerFactory queryHandlerFactory,
@@ -18,6 +20,32 @@ namespace TauCode.Cqrs.Validation
                 ??
                 throw new ArgumentNullException(nameof(queryValidatorSource));
         }
+
+
+        #endregion
+
+        #region Protected
+
+        protected IQueryValidatorSource QueryValidatorSource { get; }
+
+        #endregion
+
+        #region Overridden
+
+        protected override void OnBeforeExecuteHandler<TQuery>(IQueryHandler<TQuery> handler, TQuery query)
+        {
+            this.Validate(query);
+        }
+
+        protected override Task OnBeforeExecuteHandlerAsync<TQuery>(IQueryHandler<TQuery> handler, TQuery query, CancellationToken cancellationToken)
+        {
+            return this.ValidateAsync(query, cancellationToken);
+        }
+
+
+        #endregion
+
+        #region IValidatingQueryRunner Members
 
         public void Validate<TQuery>(TQuery query) where TQuery : IQuery
         {
@@ -32,9 +60,19 @@ namespace TauCode.Cqrs.Validation
             }
         }
 
-        protected override void OnBeforeExecuteHandler<TQuery>(IQueryHandler<TQuery> handler, TQuery query)
+        public async Task ValidateAsync<TQuery>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery
         {
-            this.Validate(query);
+            var validator = this.QueryValidatorSource.GetValidator<TQuery>();
+            if (validator != null)
+            {
+                var validationResult = await validator.ValidateAsync(query, cancellationToken);
+                if (!validationResult.IsValid)
+                {
+                    throw new ValidationException("The query is invalid.", validationResult.Errors);
+                }
+            }
         }
+
+        #endregion
     }
 }

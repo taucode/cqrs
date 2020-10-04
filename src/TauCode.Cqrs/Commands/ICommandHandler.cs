@@ -7,6 +7,6 @@ namespace TauCode.Cqrs.Commands
     {
         void Execute(TCommand command);
 
-        Task ExecuteAsync(TCommand command, CancellationToken cancellationToken = default);
+        Task ExecuteAsync(TCommand command, CancellationToken cancellationToken);
     }
 }

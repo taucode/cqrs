@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using TauCode.Cqrs.Exceptions;
 
 namespace TauCode.Cqrs.Queries
 {
@@ -29,7 +30,10 @@ namespace TauCode.Cqrs.Queries
             // idle, override in ancestor if needed.
         }
 
-        protected virtual Task OnBeforeExecuteHandlerAsync<TQuery>(IQueryHandler<TQuery> handler, TQuery query, CancellationToken cancellationToken)
+        protected virtual Task OnBeforeExecuteHandlerAsync<TQuery>(
+            IQueryHandler<TQuery> handler,
+            TQuery query,
+            CancellationToken cancellationToken)
             where TQuery : IQuery
         {
             // idle, override in ancestor if needed.
@@ -40,7 +44,7 @@ namespace TauCode.Cqrs.Queries
         #endregion
 
         #region IQueryRunner Members
-        
+
         public void Run<TQuery>(TQuery query) where TQuery : IQuery
         {
             if (query == null)
@@ -56,12 +60,12 @@ namespace TauCode.Cqrs.Queries
             }
             catch (Exception ex)
             {
-                throw new CannotCreateQueryHandlerException(ex);
+                throw new CqrsException($"Failed to create query handler for command of type '{typeof(TQuery).FullName}'.", ex);
             }
 
             if (queryHandler == null)
             {
-                throw new CannotCreateQueryHandlerException();
+                throw new CqrsException($"'{nameof(QueryHandlerFactory)}.{nameof(IQueryHandlerFactory.Create)}' returned 'null'.");
             }
 
             this.OnBeforeExecuteHandler(queryHandler, query);
@@ -84,12 +88,12 @@ namespace TauCode.Cqrs.Queries
             }
             catch (Exception ex)
             {
-                throw new CannotCreateQueryHandlerException(ex);
+                throw new CqrsException($"Failed to create query handler for command of type '{typeof(TQuery).FullName}'.", ex);
             }
 
             if (queryHandler == null)
             {
-                throw new CannotCreateQueryHandlerException();
+                throw new CqrsException($"'{nameof(QueryHandlerFactory)}.{nameof(IQueryHandlerFactory.Create)}' returned 'null'.");
             }
 
             await this.OnBeforeExecuteHandlerAsync(queryHandler, query, cancellationToken);

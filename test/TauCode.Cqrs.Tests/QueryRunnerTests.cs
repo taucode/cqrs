@@ -3,12 +3,13 @@ using NUnit.Framework;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using TauCode.Cqrs.Exceptions;
 using TauCode.Cqrs.Queries;
 
 namespace TauCode.Cqrs.Tests
 {
     [TestFixture]
-    public class QueryRunnerTest
+    public class QueryRunnerTests
     {
         #region Nested
 
@@ -125,9 +126,9 @@ namespace TauCode.Cqrs.Tests
             var query = new HelloQuery() { Name = "Maria", };
 
             // Act
-            var ex = Assert.Throws<CannotCreateQueryHandlerException>(() => queryRunner.Run(query));
+            var ex = Assert.Throws<CqrsException>(() => queryRunner.Run(query));
 
-            Assert.That(ex.Message, Is.EqualTo("Attempt to create the query handler failed."));
+            Assert.That(ex.Message, Is.EqualTo($"Failed to create query handler for command of type '{typeof(HelloQuery).FullName}'."));
             var innerEx = ex.InnerException;
             Assert.That(innerEx, Is.Not.Null);
             Assert.That(innerEx, Is.InstanceOf<InvalidOperationException>());
@@ -145,9 +146,9 @@ namespace TauCode.Cqrs.Tests
             var query = new HelloQuery() { Name = "Maria", };
 
             // Act
-            var ex = Assert.Throws<CannotCreateQueryHandlerException>(() => queryRunner.Run(query));
+            var ex = Assert.Throws<CqrsException>(() => queryRunner.Run(query));
 
-            Assert.That(ex.Message, Is.EqualTo("Attempt to create the query handler failed."));
+            Assert.That(ex.Message, Is.EqualTo("'QueryHandlerFactory.Create' returned 'null'."));
             var innerEx = ex.InnerException;
             Assert.That(innerEx, Is.Null);
         }

@@ -1,7 +1,7 @@
 ﻿2019-11-22
 ==========
-    1. Fix changelog (dates).
-    2. Fix test class names (FooTest.cs --> FooTests.cs)
++   1. Fix changelog (dates).
++   2. Fix test class names (FooTest.cs --> FooTests.cs)
 
 2019-11-25
 ==========
@@ -9,5 +9,5 @@ X   1. Write a doc about how to deploy multi-project solutions (hint: branch 're
 
 2020-03-29
 ==========
-    1. CqrsException
++   1. CqrsException
 

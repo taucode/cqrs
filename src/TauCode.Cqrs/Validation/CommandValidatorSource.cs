@@ -9,12 +9,22 @@ namespace TauCode.Cqrs.Validation
 {
     public class CommandValidatorSource : ICommandValidatorSource
     {
+        #region Constants
+
         private static readonly object[] EmptyArgs = { };
+
+        #endregion
+
+        #region Fields
 
         /// <summary>
         /// Key is command type, Value is command validator constructor
         /// </summary>
         private readonly Dictionary<Type, ConstructorInfo> _commandValidatorConstructors;
+
+        #endregion
+
+        #region Constructor
 
         public CommandValidatorSource(Assembly validatorsAssembly)
         {
@@ -30,7 +40,11 @@ namespace TauCode.Cqrs.Validation
                 .ToDictionary(x => x.Item1, x => x.Item2);
         }
 
-        private Tuple<Type, ConstructorInfo> GetCommandValidatorInfo(Type supposedCommandValidatorType)
+        #endregion
+
+        #region Private
+
+        private static Tuple<Type, ConstructorInfo> GetCommandValidatorInfo(Type supposedCommandValidatorType)
         {
             var type = supposedCommandValidatorType; // lazy
 
@@ -68,6 +82,10 @@ namespace TauCode.Cqrs.Validation
             return null;
         }
 
+        #endregion
+
+        #region ICommandValidatorSource Members
+
         public Type[] GetCommandTypes() => _commandValidatorConstructors.Keys.ToArray();
 
         public IValidator<TCommand> GetValidator<TCommand>() where TCommand : ICommand
@@ -81,5 +99,7 @@ namespace TauCode.Cqrs.Validation
             var validator = ctor.Invoke(EmptyArgs);
             return (IValidator<TCommand>)validator;
         }
+
+        #endregion
     }
 }

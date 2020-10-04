@@ -9,12 +9,23 @@ namespace TauCode.Cqrs.Validation
 {
     public class QueryValidatorSource : IQueryValidatorSource
     {
+        #region Constants
+
         private static readonly object[] EmptyArgs = { };
+
+        #endregion
+
+        #region Fields
 
         /// <summary>
         /// Key is query type, Value is query validator constructor
         /// </summary>
         private readonly Dictionary<Type, ConstructorInfo> _queryValidatorConstructors;
+
+
+        #endregion
+
+        #region Constructor
 
         public QueryValidatorSource(Assembly validatorsAssembly)
         {
@@ -30,7 +41,11 @@ namespace TauCode.Cqrs.Validation
                 .ToDictionary(x => x.Item1, x => x.Item2);
         }
 
-        private Tuple<Type, ConstructorInfo> GetQueryValidatorInfo(Type supposedQueryValidatorType)
+        #endregion
+
+        #region Private
+
+        private static Tuple<Type, ConstructorInfo> GetQueryValidatorInfo(Type supposedQueryValidatorType)
         {
             var type = supposedQueryValidatorType; // lazy
 
@@ -68,6 +83,10 @@ namespace TauCode.Cqrs.Validation
             return null;
         }
 
+        #endregion
+
+        #region IQueryValidatorSource Members
+
         public Type[] GetQueryTypes() => _queryValidatorConstructors.Keys.ToArray();
 
         public IValidator<TQuery> GetValidator<TQuery>() where TQuery : IQuery
@@ -81,5 +100,7 @@ namespace TauCode.Cqrs.Validation
             var validator = ctor.Invoke(EmptyArgs);
             return (IValidator<TQuery>)validator;
         }
+
+        #endregion
     }
 }

@@ -9,7 +9,7 @@ using TauCode.Cqrs.Exceptions;
 namespace TauCode.Cqrs.Tests
 {
     [TestFixture]
-    public class CommandDispatcherTest
+    public class CommandDispatcherTests
     {
         #region Nested
 

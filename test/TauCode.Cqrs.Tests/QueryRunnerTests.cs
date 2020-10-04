@@ -9,7 +9,7 @@ using TauCode.Cqrs.Queries;
 namespace TauCode.Cqrs.Tests
 {
     [TestFixture]
-    public class QueryRunnerTest
+    public class QueryRunnerTests
     {
         #region Nested
 

@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using TauCode.Cqrs.Abstractions;
 using TauCode.Cqrs.Commands;
 
 namespace TauCode.Cqrs.Validation

@@ -2,6 +2,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using TauCode.Cqrs.Abstractions;
 using TauCode.Cqrs.Queries;
 
 namespace TauCode.Cqrs.Validation

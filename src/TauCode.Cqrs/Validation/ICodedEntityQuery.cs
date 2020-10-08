@@ -1,4 +1,4 @@
-﻿using TauCode.Cqrs.Queries;
+﻿using TauCode.Cqrs.Abstractions;
 using TauCode.Domain.Identities;
 
 namespace TauCode.Cqrs.Validation

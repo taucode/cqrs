@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using TauCode.Cqrs.Queries;
+using TauCode.Cqrs.Abstractions;
 
 namespace TauCode.Cqrs.Validation
 {

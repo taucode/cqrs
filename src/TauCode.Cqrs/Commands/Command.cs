@@ -1,4 +1,6 @@
-﻿namespace TauCode.Cqrs.Commands
+﻿using TauCode.Cqrs.Abstractions;
+
+namespace TauCode.Cqrs.Commands
 {
     public class Command<TResult> : ICommand<TResult>
     {

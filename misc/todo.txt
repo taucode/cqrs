@@ -11,3 +11,7 @@ X   1. Write a doc about how to deploy multi-project solutions (hint: branch 're
 ==========
 +   1. CqrsException
 
+2020-10-09
+==========
++   1. Get rid of Domain and Validation stuff, move them both to TauCode.Cqrs.Validation.
+

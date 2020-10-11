@@ -5,3 +5,4 @@
 2020-10-08
 ==========
     1. Added reference to TauCode.Cqrs.Abstractions.
+    2. Got rid of Domain and Validation stuff.

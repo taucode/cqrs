@@ -6,3 +6,7 @@
 ==========
     1. Added reference to TauCode.Cqrs.Abstractions.
     2. Got rid of Domain and Validation stuff.
+
+2020-11-14
+==========
+    1. Huge dev refactoring.

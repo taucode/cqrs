@@ -8,6 +8,6 @@ namespace TauCode.Cqrs.Queries
         where TQuery : IQuery
     {
         void Execute(TQuery query);
-        Task ExecuteAsync(TQuery query, CancellationToken cancellationToken);
+        Task ExecuteAsync(TQuery query, CancellationToken cancellationToken = default);
     }
 }

@@ -8,7 +8,7 @@ namespace TauCode.Cqrs.Commands
     {
         void Dispatch<TCommand>(TCommand command) where TCommand : ICommand;
 
-        Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken)
+        Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default)
             where TCommand : ICommand;
     }
 }

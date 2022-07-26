@@ -1,4 +1,6 @@
-﻿namespace TauCode.Cqrs.Queries
+﻿using TauCode.Cqrs.Abstractions;
+
+namespace TauCode.Cqrs.Queries
 {
     public interface IQueryHandlerFactory
     {

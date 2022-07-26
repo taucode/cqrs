@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using TauCode.Cqrs.Abstractions;
+using TauCode.Cqrs.Exceptions;
 
 namespace TauCode.Cqrs.Commands
 {
@@ -53,18 +55,19 @@ namespace TauCode.Cqrs.Commands
             }
 
             ICommandHandler<TCommand> commandHandler;
+
             try
             {
                 commandHandler = CommandHandlerFactory.Create<TCommand>();
             }
             catch (Exception ex)
             {
-                throw new CannotCreateCommandHandlerException(ex);
+                throw new CqrsException($"Failed to create command handler for command of type '{typeof(TCommand).FullName}'.", ex);
             }
 
             if (commandHandler == null)
             {
-                throw new CannotCreateCommandHandlerException();
+                throw new CqrsException($"'{nameof(CommandHandlerFactory)}.{nameof(ICommandHandlerFactory.Create)}' returned 'null'.");
             }
 
             this.OnBeforeExecuteHandler(commandHandler, command);
@@ -87,12 +90,12 @@ namespace TauCode.Cqrs.Commands
             }
             catch (Exception ex)
             {
-                throw new CannotCreateCommandHandlerException(ex);
+                throw new CqrsException($"Failed to create command handler for command of type '{typeof(TCommand).FullName}'.", ex);
             }
 
             if (commandHandler == null)
             {
-                throw new CannotCreateCommandHandlerException();
+                throw new CqrsException($"'{nameof(CommandHandlerFactory)}.{nameof(ICommandHandlerFactory.Create)}' returned 'null'.");
             }
 
             await this.OnBeforeExecuteHandlerAsync(commandHandler, command, cancellationToken);

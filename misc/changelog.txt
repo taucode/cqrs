@@ -1,24 +1,20 @@
-﻿2019-06-24
+﻿2020-10-05
 ==========
-    1. Built for .NET Standard
+    1. Refactored, reorganized code.
 
-2019-10-19
+2020-10-08
 ==========
-    Version: v2.19.3
-    1. Added async support.
-    2. Added cancellation tokens support.
+    1. Added reference to TauCode.Cqrs.Abstractions.
+    2. Got rid of Domain and Validation stuff.
 
-2019-10-19
+2020-11-14
 ==========
-    Version: v3.0
-    1. Release v3.0
+    1. Huge dev refactoring.
 
-2019-10-25
+2021-03-01
 ==========
-    Hotfix: v3.0.1
-    1. Methods of QueryHandlerBase are now virtual.
+    1. Resurrection.
 
-2019-11-25
+2022-07-27
 ==========
-    Version: 4.0
-    1. Solutions reorganized.
+    1. Release 1.3.7.

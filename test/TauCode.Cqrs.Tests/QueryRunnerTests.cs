@@ -1,8 +1,5 @@
 ﻿using Moq;
 using NUnit.Framework;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using TauCode.Cqrs.Exceptions;
 using TauCode.Cqrs.Queries;
 

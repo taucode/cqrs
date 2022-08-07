@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using TauCode.Cqrs.Abstractions;
+﻿using TauCode.Cqrs.Abstractions;
 
 namespace TauCode.Cqrs.Queries
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TauCode.Cqrs.Exceptions
+﻿namespace TauCode.Cqrs.Exceptions
 {
     [Serializable]
     public class CqrsException : Exception

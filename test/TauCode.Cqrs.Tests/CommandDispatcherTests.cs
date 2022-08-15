@@ -1,6 +1,5 @@
 ﻿using Moq;
 using NUnit.Framework;
-using TauCode.Cqrs.Abstractions;
 using TauCode.Cqrs.Commands;
 using TauCode.Cqrs.Exceptions;
 

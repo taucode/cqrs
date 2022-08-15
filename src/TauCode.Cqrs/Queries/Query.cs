@@ -1,6 +1,4 @@
-﻿using TauCode.Cqrs.Abstractions;
-
-namespace TauCode.Cqrs.Queries
+﻿namespace TauCode.Cqrs.Queries
 {
     public abstract class Query<TResult> : IQuery<TResult>
     {

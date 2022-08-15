@@ -1,6 +1,4 @@
-﻿using TauCode.Cqrs.Abstractions;
-
-namespace TauCode.Cqrs.Commands
+﻿namespace TauCode.Cqrs.Commands
 {
     public interface ICommandHandler<in TCommand> where TCommand : ICommand
     {

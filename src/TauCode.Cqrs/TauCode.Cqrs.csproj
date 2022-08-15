@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TauCode.Cqrs.Abstractions" Version="1.5.5-alpha.1.2022-08-11.23-47" />
+    <PackageReference Include="TauCode.Cqrs.Abstractions" Version="1.6.0-alpha.1.2022-08-15.14-31" />
   </ItemGroup>
 
 </Project>

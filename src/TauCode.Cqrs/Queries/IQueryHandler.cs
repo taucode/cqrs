@@ -1,6 +1,4 @@
-﻿using TauCode.Cqrs.Abstractions;
-
-namespace TauCode.Cqrs.Queries
+﻿namespace TauCode.Cqrs.Queries
 {
     public interface IQueryHandler<in TQuery>
         where TQuery : IQuery

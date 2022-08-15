@@ -1,5 +1,4 @@
-﻿using TauCode.Cqrs.Abstractions;
-using TauCode.Cqrs.Exceptions;
+﻿using TauCode.Cqrs.Exceptions;
 
 namespace TauCode.Cqrs.Queries
 {

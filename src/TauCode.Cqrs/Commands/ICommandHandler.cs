@@ -1,9 +1,8 @@
-﻿namespace TauCode.Cqrs.Commands
-{
-    public interface ICommandHandler<in TCommand> where TCommand : ICommand
-    {
-        void Execute(TCommand command);
+﻿namespace TauCode.Cqrs.Commands;
 
-        Task ExecuteAsync(TCommand command, CancellationToken cancellationToken = default);
-    }
+public interface ICommandHandler<in TCommand> where TCommand : ICommand
+{
+    void Execute(TCommand command);
+
+    Task ExecuteAsync(TCommand command, CancellationToken cancellationToken = default);
 }

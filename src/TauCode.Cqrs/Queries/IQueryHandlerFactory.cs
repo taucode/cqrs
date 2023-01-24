@@ -1,7 +1,6 @@
-﻿namespace TauCode.Cqrs.Queries
+﻿namespace TauCode.Cqrs.Queries;
+
+public interface IQueryHandlerFactory
 {
-    public interface IQueryHandlerFactory
-    {
-        IQueryHandler<TQuery> Create<TQuery>() where TQuery : IQuery;
-    }
+    IQueryHandler<TQuery> Create<TQuery>() where TQuery : IQuery;
 }

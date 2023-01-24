@@ -1,19 +1,16 @@
-﻿using TauCode.Cqrs.Abstractions;
+﻿namespace TauCode.Cqrs.Queries;
 
-namespace TauCode.Cqrs.Queries
+public abstract class Query<TResult> : IQuery<TResult>
 {
-    public abstract class Query<TResult> : IQuery<TResult>
+    private TResult _result;
+
+    public void SetResult(TResult result)
     {
-        private TResult _result;
+        _result = result;
+    }
 
-        public void SetResult(TResult result)
-        {
-            _result = result;
-        }
-
-        public TResult GetResult()
-        {
-            return _result;
-        }
+    public TResult GetResult()
+    {
+        return _result;
     }
 }

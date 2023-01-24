@@ -1,12 +1,9 @@
-﻿using TauCode.Cqrs.Abstractions;
+﻿namespace TauCode.Cqrs.Queries;
 
-namespace TauCode.Cqrs.Queries
+public interface IQueryRunner
 {
-    public interface IQueryRunner
-    {
-        void Run<TQuery>(TQuery query) where TQuery : IQuery;
+    void Run<TQuery>(TQuery query) where TQuery : IQuery;
 
-        Task RunAsync<TQuery>(TQuery query, CancellationToken cancellationToken = default)
-            where TQuery : IQuery;
-    }
+    Task RunAsync<TQuery>(TQuery query, CancellationToken cancellationToken = default)
+        where TQuery : IQuery;
 }

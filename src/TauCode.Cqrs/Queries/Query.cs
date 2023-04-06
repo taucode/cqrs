@@ -2,7 +2,7 @@
 
 public abstract class Query<TResult> : IQuery<TResult>
 {
-    private TResult _result;
+    private TResult _result = default!;
 
     public void SetResult(TResult result)
     {

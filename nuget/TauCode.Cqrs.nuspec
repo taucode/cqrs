@@ -2,21 +2,21 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>TauCode.Cqrs</id>
-    <version>1.7.1-alpha.1.2023-01-26.12-28</version>
+    <version>1.8.1-alpha.1.2023-04-06.11-19</version>
     <authors>TauCode</authors>
     <owners>TauCode</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="file">LICENSE</license>
-    <projectUrl>https://github.com/taucode/taucode.cqrs</projectUrl>
-    <repository type="git" url="https://github.com/taucode/taucode.cqrs"/>
+    <projectUrl>https://github.com/taucode/cqrs</projectUrl>
+    <repository type="git" url="https://github.com/taucode/cqrs"/>
     <description>Basic functionality for CQRS support</description>
     <releaseNotes>
-      Developing release 1.7.1.
+      Developing release 1.8.1.
     </releaseNotes>
     <tags>taucode cqrs</tags>
     <dependencies>
       <group targetFramework=".NETCoreApp6.0">
-        <dependency id="TauCode.Cqrs.Abstractions" version="1.7.0" />
+        <dependency id="TauCode.Cqrs.Abstractions" version="1.8.1-alpha.1.2023-02-10.10-32" />
       </group>
     </dependencies>
   </metadata>

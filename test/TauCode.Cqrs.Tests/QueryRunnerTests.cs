@@ -105,11 +105,11 @@ public class QueryRunnerTests
     {
         // Arrange
         IQueryRunner queryRunner = new QueryRunner(_queryHandlerFactoryMock.Object);
-        HelloQuery query = null;
+        HelloQuery query = null!;
 
         // Act && Assert
         var ex = Assert.Throws<ArgumentNullException>(() => queryRunner.Run(query));
-        Assert.That(ex.ParamName, Is.EqualTo("query"));
+        Assert.That(ex!.ParamName, Is.EqualTo("query"));
     }
 
     [Test]
@@ -138,7 +138,7 @@ public class QueryRunnerTests
         // Arrange
         _queryHandlerFactoryMock
             .Setup(x => x.Create<HelloQuery>())
-            .Returns((HelloQueryHandler)null);
+            .Returns((HelloQueryHandler)null!);
         IQueryRunner queryRunner = new QueryRunner(_queryHandlerFactoryMock.Object);
         var query = new HelloQuery() { Name = "Maria", };
 

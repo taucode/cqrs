@@ -1,8 +1,8 @@
 ﻿namespace TauCode.Cqrs.Queries;
 
-public interface IQueryHandler<in TQuery>
-    where TQuery : IQuery
+public interface IQueryHandler
 {
-    void Execute(TQuery query);
-    Task ExecuteAsync(TQuery query, CancellationToken cancellationToken = default);
+    void Execute(IQuery query);
+
+    Task ExecuteAsync(IQuery query, CancellationToken cancellationToken);
 }

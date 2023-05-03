@@ -1,101 +1,84 @@
-﻿using TauCode.Cqrs.Exceptions;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace TauCode.Cqrs.Queries;
 
+// todo regions
 public class QueryRunner : IQueryRunner
 {
-    #region Fields
+    protected IServiceProvider ServiceProvider { get; }
 
-    protected readonly IQueryHandlerFactory QueryHandlerFactory;
-
-    #endregion
-
-    #region Constructor
-
-    public QueryRunner(IQueryHandlerFactory queryHandlerFactory)
+    public QueryRunner(IServiceProvider serviceProvider)
     {
-        QueryHandlerFactory = queryHandlerFactory ?? throw new ArgumentNullException(nameof(queryHandlerFactory));
+        this.ServiceProvider = serviceProvider;
     }
 
-    #endregion
-
-    #region Virtual
-
-    protected virtual void OnBeforeExecuteHandler<TQuery>(IQueryHandler<TQuery> handler, TQuery query)
-        where TQuery : IQuery
+    public virtual void Run(IQuery query)
     {
-        // idle, override in ancestor if needed.
+        throw new NotSupportedException();
     }
-
-    protected virtual Task OnBeforeExecuteHandlerAsync<TQuery>(
-        IQueryHandler<TQuery> handler,
-        TQuery query,
-        CancellationToken cancellationToken)
-        where TQuery : IQuery
-    {
-        // idle, override in ancestor if needed.
-        return Task.CompletedTask;
-    }
-
-
-    #endregion
-
-    #region IQueryRunner Members
 
     public void Run<TQuery>(TQuery query) where TQuery : IQuery
     {
-        if (query == null)
-        {
-            throw new ArgumentNullException(nameof(query));
-        }
-
-        IQueryHandler<TQuery> queryHandler;
-
-        try
-        {
-            queryHandler = QueryHandlerFactory.Create<TQuery>();
-        }
-        catch (Exception ex)
-        {
-            throw new CqrsException($"Failed to create query handler for command of type '{typeof(TQuery).FullName}'.", ex);
-        }
-
-        if (queryHandler == null)
-        {
-            throw new CqrsException($"'{nameof(QueryHandlerFactory)}.{nameof(IQueryHandlerFactory.Create)}' returned 'null'.");
-        }
-
-        this.OnBeforeExecuteHandler(queryHandler, query);
-
-        queryHandler.Execute(query);
+        throw new NotImplementedException();
     }
 
-    public async Task RunAsync<TQuery>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery
+    protected virtual Task OnBeforeExecuteAsync(
+        IQueryHandler queryHandler,
+        IQuery query,
+        CancellationToken cancellationToken)
     {
-        if (query == null)
-        {
-            throw new ArgumentNullException(nameof(query));
-        }
+        return Task.CompletedTask;
+    }
 
-        IQueryHandler<TQuery> queryHandler;
+    protected virtual Task OnAfterExecuteAsync(
+        IQueryHandler queryHandler,
+        IQuery query,
+        Exception? exception,
+        CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
+
+    public virtual async Task RunAsync(IQuery query, CancellationToken cancellationToken = default)
+    {
+        // todo: dynamically invoke RunAsync<TCommand>?
+
+        var queryType = query.GetType();
+        var queryHandlerType = typeof(IQueryHandler<>).MakeGenericType(queryType);
+        var queryHandler = (IQueryHandler)this.ServiceProvider.GetRequiredService(queryHandlerType);
+
+        await this.OnBeforeExecuteAsync(queryHandler, query, cancellationToken);
 
         try
         {
-            queryHandler = QueryHandlerFactory.Create<TQuery>();
+            await queryHandler.ExecuteAsync(query, cancellationToken);
         }
         catch (Exception ex)
         {
-            throw new CqrsException($"Failed to create query handler for command of type '{typeof(TQuery).FullName}'.", ex);
+            await this.OnAfterExecuteAsync(queryHandler, query, ex, cancellationToken);
+            throw;
         }
 
-        if (queryHandler == null)
-        {
-            throw new CqrsException($"'{nameof(QueryHandlerFactory)}.{nameof(IQueryHandlerFactory.Create)}' returned 'null'.");
-        }
-
-        await this.OnBeforeExecuteHandlerAsync(queryHandler, query, cancellationToken);
-        await queryHandler.ExecuteAsync(query, cancellationToken);
+        await this.OnAfterExecuteAsync(queryHandler, query, null, cancellationToken);
     }
 
-    #endregion
+    public async Task RunAsync<TQuery>(TQuery query, CancellationToken cancellationToken = default)
+        where TQuery : IQuery
+    {
+        var queryHandler = this.ServiceProvider.GetRequiredService<IQueryHandler<TQuery>>();
+
+        await this.OnBeforeExecuteAsync(queryHandler, query, cancellationToken);
+
+        try
+        {
+            await queryHandler.ExecuteAsync(query, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            await this.OnAfterExecuteAsync(queryHandler, query, ex, cancellationToken);
+            throw;
+        }
+
+        await this.OnAfterExecuteAsync(queryHandler, query, null, cancellationToken);
+    }
 }

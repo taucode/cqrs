@@ -1,4 +1,9 @@
-﻿2023-05-03
+﻿2024-10-14
+==========
+    1. Resurrected.
+    2. Ported to .NET 8
+
+2023-05-03
 ==========
     1. Refactoring.
 
@@ -6,29 +11,28 @@
 ==========
     1. Winter resurrection - 2023.
 
-2020-10-05
+2022-08-08
 ==========
-    1. Refactored, reorganized code.
+    1. Moved to .NET 6.
+    2. Released 1.5.0
+
+2022-07-27
+==========
+    1. Release 1.3.7.
+
+2021-03-01
+==========
+    1. Resurrection.
+
+2020-11-14
+==========
+    1. Huge dev refactoring.
 
 2020-10-08
 ==========
     1. Added reference to TauCode.Cqrs.Abstractions.
     2. Got rid of Domain and Validation stuff.
 
-2020-11-14
+2020-10-05
 ==========
-    1. Huge dev refactoring.
-
-2021-03-01
-==========
-    1. Resurrection.
-
-2022-07-27
-==========
-    1. Release 1.3.7.
-
-2022-08-08
-==========
-    1. Moved to .NET 6.
-    2. Released 1.5.0
-
+    1. Refactored, reorganized code.

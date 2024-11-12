@@ -1,4 +1,4 @@
-﻿namespace TauCode.Cqrs.Commands;
+﻿namespace TauCode.Cqrs;
 
 public abstract class AsyncCommandHandlerBase<TCommand> : ICommandHandler<TCommand> where TCommand : ICommand
 {

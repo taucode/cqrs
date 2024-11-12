@@ -1,4 +1,4 @@
-﻿namespace TauCode.Cqrs.Exceptions;
+﻿namespace TauCode.Cqrs;
 
 [Serializable]
 public class CqrsException : Exception

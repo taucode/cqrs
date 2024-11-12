@@ -1,6 +1,4 @@
-﻿using TauCode.Cqrs.Exceptions;
-
-namespace TauCode.Cqrs.Commands;
+﻿namespace TauCode.Cqrs;
 
 public class CommandDispatcher : ICommandDispatcher
 {

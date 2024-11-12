@@ -1,4 +1,4 @@
-﻿namespace TauCode.Cqrs.Queries;
+﻿namespace TauCode.Cqrs;
 
 public abstract class AsyncQueryHandlerBase<TQuery> : IQueryHandler<TQuery> where TQuery : IQuery
 {

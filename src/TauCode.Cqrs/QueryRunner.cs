@@ -1,6 +1,4 @@
-﻿using TauCode.Cqrs.Exceptions;
-
-namespace TauCode.Cqrs.Queries;
+﻿namespace TauCode.Cqrs;
 
 public class QueryRunner : IQueryRunner
 {
@@ -36,7 +34,6 @@ public class QueryRunner : IQueryRunner
         // idle, override in ancestor if needed.
         return Task.CompletedTask;
     }
-
 
     #endregion
 

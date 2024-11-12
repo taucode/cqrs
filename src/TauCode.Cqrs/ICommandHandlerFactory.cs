@@ -1,4 +1,4 @@
-﻿namespace TauCode.Cqrs.Commands;
+﻿namespace TauCode.Cqrs;
 
 public interface ICommandHandlerFactory
 {

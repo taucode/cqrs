@@ -1,4 +1,4 @@
-﻿namespace TauCode.Cqrs.Queries;
+﻿namespace TauCode.Cqrs;
 
 public abstract class Query<TResult> : IQuery<TResult>
 {

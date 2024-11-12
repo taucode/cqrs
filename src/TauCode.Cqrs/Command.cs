@@ -1,6 +1,6 @@
-﻿namespace TauCode.Cqrs.Commands;
+﻿namespace TauCode.Cqrs;
 
-public abstract class Command<TResult> : ICommand<TResult>
+public class Command<TResult> : ICommand<TResult>
 {
     private TResult _result = default!;
 

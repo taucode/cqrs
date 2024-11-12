@@ -1,4 +1,8 @@
-﻿2024-10-14
+﻿2024-11-12
+==========
+    1. Preparing a huge refactoring (code name Cqrs2).
+
+2024-10-14
 ==========
     1. Resurrected.
     2. Ported to .NET 8

@@ -1,82 +1,102 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using TauCode.Cqrs.Exceptions;
 
 namespace TauCode.Cqrs.Commands;
 
 public class CommandDispatcher : ICommandDispatcher
 {
-    protected IServiceProvider ServiceProvider { get; }
+    #region Fields
 
-    public CommandDispatcher(IServiceProvider serviceProvider)
+    protected readonly ICommandHandlerFactory CommandHandlerFactory;
+
+    #endregion
+
+    #region Constructor
+
+    public CommandDispatcher(ICommandHandlerFactory commandHandlerFactory)
     {
-        this.ServiceProvider = serviceProvider;
+        CommandHandlerFactory =
+            commandHandlerFactory ?? throw new ArgumentNullException(nameof(commandHandlerFactory));
     }
 
-    public virtual void Dispatch(ICommand command)
-    {
-        throw new NotSupportedException();
-    }
+    #endregion
 
-    public void Dispatch<TCommand>(TCommand command) where TCommand : ICommand
-    {
-        throw new NotImplementedException();
-    }
+    #region Virtual
 
-    protected virtual Task OnBeforeExecuteAsync(
-        ICommandHandler commandHandler,
-        ICommand command,
-        CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
-    }
-
-    protected virtual Task OnAfterExecuteAsync(
-        ICommandHandler commandHandler,
-        ICommand command,
-        Exception? exception,
-        CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
-    }
-
-    public virtual async Task DispatchAsync(ICommand command, CancellationToken cancellationToken = default)
-    {
-        // todo: dynamically invoke DispatchAsync<TCommand>?
-        var commandType = command.GetType();
-        var commandHandlerType = typeof(ICommandHandler<>).MakeGenericType(commandType);
-        var commandHandler = (ICommandHandler)this.ServiceProvider.GetRequiredService(commandHandlerType);
-
-        await this.OnBeforeExecuteAsync(commandHandler, command, cancellationToken);
-
-        try
-        {
-            await commandHandler.ExecuteAsync(command, cancellationToken);
-        }
-        catch (Exception ex)
-        {
-            await this.OnAfterExecuteAsync(commandHandler, command, ex, cancellationToken);
-            throw;
-        }
-
-        await this.OnAfterExecuteAsync(commandHandler, command, null, cancellationToken);
-    }
-
-    public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default)
+    protected virtual void OnBeforeExecuteHandler<TCommand>(ICommandHandler<TCommand> handler, TCommand command)
         where TCommand : ICommand
     {
-        var commandHandler = this.ServiceProvider.GetRequiredService<ICommandHandler<TCommand>>();
+        // idle, override in ancestor if needed.
+    }
 
-        await this.OnBeforeExecuteAsync(commandHandler, command, cancellationToken);
+    protected virtual Task OnBeforeExecuteHandlerAsync<TCommand>(
+        ICommandHandler<TCommand> handler,
+        TCommand command,
+        CancellationToken cancellationToken)
+        where TCommand : ICommand
+    {
+        // idle, override in ancestor if needed.
+        return Task.CompletedTask;
+    }
+
+    #endregion
+
+    #region ICommandDispatcher Members
+
+    public void Dispatch<TCommand>(TCommand command)
+        where TCommand : ICommand
+    {
+        if (command == null)
+        {
+            throw new ArgumentNullException(nameof(command));
+        }
+
+        ICommandHandler<TCommand> commandHandler;
 
         try
         {
-            await commandHandler.ExecuteAsync(command, cancellationToken);
+            commandHandler = CommandHandlerFactory.Create<TCommand>();
         }
         catch (Exception ex)
         {
-            await this.OnAfterExecuteAsync(commandHandler, command, ex, cancellationToken);
-            throw;
+            throw new CqrsException($"Failed to create command handler for command of type '{typeof(TCommand).FullName}'.", ex);
         }
 
-        await this.OnAfterExecuteAsync(commandHandler, command, null, cancellationToken);
+        if (commandHandler == null)
+        {
+            throw new CqrsException($"'{nameof(CommandHandlerFactory)}.{nameof(ICommandHandlerFactory.Create)}' returned 'null'.");
+        }
+
+        this.OnBeforeExecuteHandler(commandHandler, command);
+
+        commandHandler.Execute(command);
     }
+
+    public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken)
+        where TCommand : ICommand
+    {
+        if (command == null)
+        {
+            throw new ArgumentNullException(nameof(command));
+        }
+
+        ICommandHandler<TCommand> commandHandler;
+        try
+        {
+            commandHandler = CommandHandlerFactory.Create<TCommand>();
+        }
+        catch (Exception ex)
+        {
+            throw new CqrsException($"Failed to create command handler for command of type '{typeof(TCommand).FullName}'.", ex);
+        }
+
+        if (commandHandler == null)
+        {
+            throw new CqrsException($"'{nameof(CommandHandlerFactory)}.{nameof(ICommandHandlerFactory.Create)}' returned 'null'.");
+        }
+
+        await this.OnBeforeExecuteHandlerAsync(commandHandler, command, cancellationToken);
+        await commandHandler.ExecuteAsync(command, cancellationToken);
+    }
+
+    #endregion
 }

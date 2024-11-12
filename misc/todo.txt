@@ -1,6 +1,6 @@
 ﻿2023-05-03
 ==========    
-    1. Re-order changelog and todo (newer is upper).
++   1. Re-order changelog and todo (newer is upper).
 
 2021-04-17
 ==========
